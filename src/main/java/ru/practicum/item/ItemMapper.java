@@ -2,15 +2,16 @@ package ru.practicum.item;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import ru.practicum.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 final class ItemMapper {
-    public static Item toItem(ItemDto itemDto, long userId) {
+    public static Item toItem(ItemDto itemDto, User user) {
         return Item.builder()
-                .userId(userId)
+                .user(user)
                 .url(itemDto.getUrl())
                 .tags(itemDto.getTags())
                 .build();
@@ -19,7 +20,7 @@ final class ItemMapper {
     public static ItemDto toItemDto(Item item) {
         return ItemDto.builder()
                 .id(item.getId())
-                .userId(item.getUserId())
+                .userId(item.getUser().getId())
                 .url(item.getUrl())
                 .tags(item.getTags())
                 .build();
